@@ -1,0 +1,10 @@
+-- 코드를 입력하세요
+# group by -> 집계 : 집계결과를 임시의 테이블로 하나 생성하고, 만들어진 테이블에서 조건절 수행
+## 임시의 테이블은 반드시 alias(별명)이 있어야함
+### group by후 조건절 : "Having"
+select name, cnt from 
+(SELECT name, COUNT(animal_id) as cnt from animal_ins
+    group by name
+    having name is not null) as s
+    where s.cnt >= 2
+    order by name
