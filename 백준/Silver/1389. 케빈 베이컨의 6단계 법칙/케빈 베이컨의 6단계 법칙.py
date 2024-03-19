@@ -14,16 +14,21 @@ for _ in range(m):
 # 플로이드 워셜 알고리즘
 # 중간에 거치는 노드를 하나씩 순회하면서, 최단거리 업데이트
 # 한번이상 거치는 경우를 고려하기 위해, while문으로 변화가 없을때까지 반복
-graph_new = copy.deepcopy(graph)
-while True:
-    for k in range(n):
-        for a in range(n):
-            for b in range(n):
-                graph[a][b] = min(graph[a][b], graph[a][k]+graph[k][b])
-    if graph_new == graph:
-        break
-    else:
-        graph_new=copy.deepcopy(graph)
+# graph_new = copy.deepcopy(graph)
+# while True:
+#    for k in range(n):
+#        for a in range(n):
+#            for b in range(n):
+#                graph[a][b] = min(graph[a][b], graph[a][k]+graph[k][b])
+#    if graph_new == graph:
+#        break
+#    else:
+#        graph_new=copy.deepcopy(graph)
+
+for k in range(n):
+    for a in range(n):
+        for b in range(n):
+             graph[a][b] = min(graph[a][b], graph[a][k]+graph[k][b])
 
 _sum = list(map(sum, graph))
 for i,v in enumerate(_sum):
