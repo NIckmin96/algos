@@ -17,11 +17,9 @@ def solution(n, t, m, p):
     # 나머지 맞추기
     if m==p:
         p=0
-    # print(convert(2,2))
     while len(answer)<t:
         # 1. 진수 변환
         new_num = convert(num,n)
-        # print(new_num)
         # 2. 진수 한자리씩 끊어서 출력+내가 말하는 차례인지 확인
         for i in new_num:
             if cnt%m==p:
