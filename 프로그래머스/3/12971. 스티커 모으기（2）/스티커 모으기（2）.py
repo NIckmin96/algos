@@ -1,18 +1,30 @@
 def solution(sticker):
     answer = 0
-    # dp(점화식)
-    if len(sticker)<=2:
-        return max(sticker)
-    # 0부터 시작
-    dp = [0]*(len(sticker)-1)
-    for i,v in enumerate(sticker[:-1]):
-        dp[i]=max(dp[i-2]+v, dp[i-1])
-    answer = max(answer, dp[-1])
-    # 1부터 시작
-    dp = [0]*(len(sticker)-1)
-    for i,v in enumerate(sticker[1:]):
-        dp[i]=max(dp[i-2]+v, dp[i-1])
-    answer = max(answer, dp[-1])
+    # 완전탐색-재귀 함수(시간 초과 의심됨)
+    available = [True]*len(sticker)
     
+    def func(idx, available, _sum=0, tmp=[]):
+        nonlocal answer
+        # 사용 처리
+        for i in range(-1,2):
+            new_idx = idx+i if idx+i<len(sticker) else idx+i-len(sticker)
+            available[new_idx]=False
+        
+        if sum(available)==0:
+            print(tmp, _sum)
+            answer = max(answer, _sum)
+            return 
+        
+        for i,v in enumerate(available):
+            if v:
+                func(i,available,_sum+sticker[idx], tmp+[sticker[idx]])
+                
+        for i in range(-1,2):
+            new_idx = idx+i if idx+i<len(sticker) else idx+i-len(sticker)
+            available[new_idx]=True
+                
+    # main
+    for i in range(len(sticker)):
+        func(i, available)
         
     return answer
