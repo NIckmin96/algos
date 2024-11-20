@@ -1,4 +1,26 @@
-def solution(n, k):
+def solution(n,k):
+    from math import factorial
+    answer = []
+    nums = list(range(1,n+1))
+    while n>0:
+        div,k = divmod(k, factorial(n-1))
+        if div:
+            if k:
+                answer.append(nums.pop(div))
+            else:
+                answer.append(nums.pop(div-1))
+                
+        else:
+            if k:
+                answer.append(nums.pop(0))
+            else:
+                answer.append(nums.pop(-1))
+        n-=1
+            
+    return answer
+    
+
+def solution2(n, k):
     from math import factorial
     from itertools import permutations
     answer = []
