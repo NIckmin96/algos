@@ -1,3 +1,39 @@
+# prim
+def solution(n,costs):
+    answer = 0
+    import heapq
+    # 연결 정보 초기화
+    connect_dic = dict()
+    for a,b,c in costs:
+        tmp = {b:c}
+        if a in connect_dic.keys():
+            connect_dic[a].update(tmp)
+        else:
+            connect_dic[a] = tmp
+        tmp = {a:c}
+        if b in connect_dic.keys():
+            connect_dic[b].update(tmp)
+        else:
+            connect_dic[b] = tmp
+    # prim
+    visited = [False]*n
+    h = [(0,0)]
+    while h:
+        if all(visited):
+            break
+        c,v = heapq.heappop(h)
+        if visited[v]:
+            continue
+        # print(v,c,answer)
+        visited[v] = True
+        answer+=c
+        for nv,nc in connect_dic[v].items():
+            if not visited[nv]:
+                heapq.heappush(h,(nc,nv))
+                
+    return answer
+            
+
 # kruskal
 def find_parent(parent, x):
     if parent[x]!=x:
@@ -10,7 +46,7 @@ def union(parent,a,b):
     else:
         parent[a] = b
 
-def solution(n, costs):
+def solution2(n, costs):
     answer = 0
     # 0. parent(root 노드) 초기화
     parent = {i:i for i in range(n)}
