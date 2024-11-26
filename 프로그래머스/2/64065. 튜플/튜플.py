@@ -1,36 +1,13 @@
 def solution(s):
     answer = []
-    s = s.replace('{{','{')
-    s = s.replace('}}','}')
-    lst = []
-    tmp = []
-    num = ''
-    # print(s)
-    for i in s:
-        if i=='{':
-            tmp = []
-        elif i=='}':
-            tmp.append(int(num))
-            num=''
-            lst.append(tmp)
-        elif i==',':
-            if num=='':
-                continue
-            else:
-                tmp.append(int(num))
-                num=''
-        elif i.isdigit():
-            num+=i
-    
-    # print(lst)
-    for i,v in enumerate(sorted(lst, key=lambda x:len(x))):
-        if i==0:
-            answer.append(v[0])
-        else:
-            tmp = list(set(v)-set(answer))
-            if tmp:
-                answer.append(tmp[0])
-            else:
-                break
-        
+    s = s[1:-1]
+    lst = s.split('},') # 1e6
+    lst = list(map(lambda x:x.lstrip("{").rstrip("}"), lst)) #1e6
+    lst = list(map(lambda x:list(map(int, x.split(','))), lst)) #1e6
+    lst = sorted(lst, key=lambda x:len(x)) #1e6
+    for s in lst: # 1e6
+        for x in s: # 1 ~ 1e6
+            if x not in answer:
+                answer.append(x)
+    # print(answer)
     return answer
