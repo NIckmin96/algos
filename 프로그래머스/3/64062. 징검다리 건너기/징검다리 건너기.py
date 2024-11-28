@@ -11,18 +11,8 @@ def solution(stones, k):
         while heap[0][1]<=i-k:
             heapq.heappop(heap)
         answer = min(answer, -heap[0][0])
-        # print(heap)
-        # print(answer)
-        # max_table.append(-heap[0][0])
-        
-    # print(max_table)
             
     return answer
-            
-    # for i in range(l-k+1):
-    #     m = min(m,max(stones[i:i+k]))
-    
-    # return m
             
         
     
